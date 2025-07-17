@@ -4,8 +4,8 @@ import torch.nn as nn
 from .utils import unetConv2, unetUp, conv2DBatchNormRelu, conv2DBatchNorm
 import torch
 import torch.nn.functional as F
-from models.layers.grid_attention_layer import GridAttentionBlock2D_TORR as AttentionBlock2D
-from models.networks_other import init_weights
+from nnunetv2.hs_custom.attention_gated_unet.models.layers.grid_attention_layer import GridAttentionBlock2D_TORR as AttentionBlock2D
+from nnunetv2.hs_custom.attention_gated_unet.models.networks_other import init_weights
 
 class sononet_grid_attention(nn.Module):
 

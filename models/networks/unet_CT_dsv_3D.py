@@ -1,7 +1,7 @@
 import torch.nn as nn
 from .utils import UnetConv3, UnetUp3_CT, UnetDsv3
 import torch.nn.functional as F
-from models.networks_other import init_weights
+from nnunetv2.hs_custom.attention_gated_unet.models.networks_other import init_weights
 import torch
 
 class unet_CT_dsv_3D(nn.Module):

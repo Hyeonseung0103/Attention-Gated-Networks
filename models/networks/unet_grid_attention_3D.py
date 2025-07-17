@@ -1,8 +1,8 @@
 import torch.nn as nn
 from .utils import UnetConv3, UnetUp3, UnetGridGatingSignal3
 import torch.nn.functional as F
-from models.layers.grid_attention_layer import GridAttentionBlock3D
-from models.networks_other import init_weights
+from nnunetv2.hs_custom.attention_gated_unet.models.layers.grid_attention_layer import GridAttentionBlock3D
+from nnunetv2.hs_custom.attention_gated_unet.models.networks_other import init_weights
 
 class unet_grid_attention_3D(nn.Module):
 

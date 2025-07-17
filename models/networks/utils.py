@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from models.networks_other import init_weights
+from nnunetv2.hs_custom.attention_gated_unet.models.networks_other import init_weights
 
 
 class conv2DBatchNorm(nn.Module):
@@ -273,6 +273,24 @@ class UnetUp3_CT(nn.Module):
         padding = 2 * [offset // 2, offset // 2, 0]
         outputs1 = F.pad(inputs1, padding)
         return self.conv(torch.cat([outputs1, outputs2], 1))
+
+class UnetUp3_CT_HS(nn.Module):
+    def __init__(self, scale_factor = (2,2,2)):
+        super(UnetUp3_CT_HS, self).__init__()
+        self.up = nn.Upsample(scale_factor=scale_factor, mode='trilinear')
+
+        # initialise the blocks
+        for m in self.children():
+            if m.__class__.__name__.find('UnetConv3') != -1: continue
+            init_weights(m, init_type='kaiming')
+
+    def forward(self, inputs1, inputs2):
+        outputs2 = self.up(inputs2)
+        offset = outputs2.size()[2] - inputs1.size()[2]
+        padding = 2 * [offset // 2, offset // 2, 0]
+        outputs1 = F.pad(inputs1, padding)
+
+        return torch.cat([outputs1, outputs2], 1)
 
 
 # Squeeze-and-Excitation Network

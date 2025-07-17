@@ -2,8 +2,8 @@ import math
 import torch.nn as nn
 from .utils import UnetConv3, UnetUp3
 import torch.nn.functional as F
-from models.layers.nonlocal_layer import NONLocalBlock3D
-from models.networks_other import init_weights
+from nnunetv2.hs_custom.attention_gated_unet.models.layers.nonlocal_layer import NONLocalBlock3D
+from nnunetv2.hs_custom.attention_gated_unet.models.networks_other import init_weights
 
 class unet_nonlocal_3D(nn.Module):
 
